@@ -12,7 +12,7 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-2">
+      <div class="col-sm-2"> 
       {% block sidebar %}
         <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
@@ -33,6 +33,7 @@
           <hr>
            <strong>Staff</strong>
            <li><a href="{% url 'borrowedBooks' %}">All Borrowed books</a></li>
+           <li><a href="{% url 'author_create' %}">Create Author</a></li>
           {% endif %} 
         </ul>
      {% endblock %}

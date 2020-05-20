@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from catalog.models import Book,bookInstance,Author,Language,Genre
 from django.views import generic
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 import datetime
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required,permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
 
 @login_required
 def index(request):
@@ -32,7 +33,7 @@ def index(request):
     }
     return render(request,'index.html',context=context)
 
-class BookListView(generic.ListView):
+class BookListView(LoginRequiredMixin,generic.ListView):
     model=Book
     context_object_name='list'
     template_name='book.html'
@@ -100,3 +101,20 @@ def renew_book_librarian(request,pk):
         'book_instance': book_instance,
     }
     return render(request, 'book_renew_librarian.html', context)
+
+
+class AuthorCreate(CreateView):
+    model=Author
+    fields='__all__'
+    initial={'date_of_death':'05/01/2019'}
+    template_name='author_form.html'
+
+class AuthorUpdate(UpdateView):
+    model=Author
+    fields=['first_name','last_name','date_of_birth','date_of_death']
+    template_name='author_form.html'
+
+class AuthorDelete(DeleteView):
+    model=Author
+    success_url=reverse_lazy('authors')
+    template_name='author_confirm_delete.html'
