@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Author:{{list.first_name}},{{list.last_name}}</h1>
+<p>{{list.date_of_birth}}</p>
+<h2>Books</h2>
+{% for books in list.book_set.all  %}
+<a href="{% url 'book-detail' list.pk %}">{{books.title}}</a>
+<p>{{books.summary}}</p>
+{% endfor %}
+{% endblock  %}
