@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '_)rh8+5jdcpr3&(23y=i-*!39xit=g
 DEBUG = False
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['frozen-caverns-17101.herokuapp.com']
 
 
 # Application definition
